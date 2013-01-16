@@ -2,7 +2,7 @@
 
 # string-extended
 
-`array-extended` is a Javascript library that can be used standalone or incorporated into [`extended`](https://github.com/doug-martin/extended)
+`string-extended` is a Javascript library that can be used standalone or incorporated into [`extended`](https://github.com/doug-martin/extended)
 
 ```javascript
 var string = require("string-extended");
