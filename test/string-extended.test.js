@@ -85,11 +85,12 @@ it.describe("string-extended",function (it) {
         ]).value(), '{"a":"b"}');
 
         var test = {};
+        test.test = test;
         assert.throws(function () {
-            stringExtended("%j").format([comb.merge(test, {a: test})]);
+            stringExtended("%j").format([test]);
         });
         assert.throws(function () {
-            stringExtended("%4j").format([comb.merge(test, {a: test})]);
+            stringExtended("%4j").format([test]);
         });
         var tzInfo = getTimeZoneOffset(new Date(-1));
         assert.equal(stringExtended("%D").format([new Date(-1)]).value(), 'Wed Dec 31 1969 ' + (23 + tzInfo[0]) + ':59:59 GMT' + tzInfo[1] + " (" + tzInfo[2] + ")");
