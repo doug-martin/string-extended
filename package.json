@@ -19,8 +19,8 @@
     "license": "MIT",
     "dependencies": {
         "extended": "0.0.2",
-        "is-extended": "0.0.1",
-        "date-extended": "0.0.1"
+        "is-extended": "0.0.2",
+        "date-extended": "0.0.2"
     },
     "devDependencies": {
         "it": "~0.1.0",
