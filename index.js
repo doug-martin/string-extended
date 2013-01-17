@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    function defineString(extender, is, date) {
+    function defineString(extended, is, date) {
 
         var isHash = is.isHash, aSlice = Array.prototype.slice;
 
@@ -48,7 +48,7 @@
 
                 }
             } else {
-                throw new Error("stringExtender.format : when using %d the parameter must be a number!");
+                throw new Error("stringExtended.format : when using %d the parameter must be a number!");
             }
             return ret;
         }
@@ -449,7 +449,7 @@
         };
 
 
-        var i, ret = extender.define(is.isString, string).define(is.isArray, {style: style});
+        var i, ret = extended.define(is.isString, string).define(is.isArray, {style: style});
         for (i in string) {
             if (string.hasOwnProperty(i)) {
                 ret[i] = string[i];
@@ -461,15 +461,15 @@
 
     if ("undefined" !== typeof exports) {
         if ("undefined" !== typeof module && module.exports) {
-            module.exports = defineString(require("extender"), require("is-extended"), require("date-extended"));
+            module.exports = defineString(require("extended"), require("is-extended"), require("date-extended"));
 
         }
     } else if ("function" === typeof define) {
         define(["require"], function (require) {
-            return defineString(require("extender"), require("is-extended"), require("date-extended"));
+            return defineString(require("extended"), require("is-extended"), require("date-extended"));
         });
     } else {
-        this.stringExtended = defineString(extender, isExtended, dateExtended);
+        this.stringExtended = defineString(this.extended, this.isExtended, this.dateExtended);
     }
 
 }).call(this);
