@@ -6,7 +6,7 @@ var it = require('it'),
 
 
 it.describe("string-extended",function (it) {
- 
+
 
     var getTimeZoneOffset = function (date) {
         var offset = date.getTimezoneOffset();
