@@ -57,11 +57,11 @@ it.describe("string-extended",function (it) {
             stringExtended.format("%4j", [comb.merge(test, {a: test})]);
         });
         var tzInfo = getTimeZoneOffset(new Date(-1));
-        assert.equal(stringExtended.format("%D", [new Date(-1)]), 'Wed Dec 31 1969 ' + (23 + tzInfo[0]) + ':59:59 GMT' + tzInfo[1] + " (" + tzInfo[2] + ")");
+        assert.equal(stringExtended.format("%D", [new Date(-1)]), new Date(-1).toString());
         var date = new Date(2006, 7, 11, 0, 55, 12, 345), tzInfo = getTimeZoneOffset(date);
         assert.equal(stringExtended.format("%[yyyy]D %[EEEE, MMMM dd, yyyy]D %[M/dd/yy]D %[H:m:s.SS]D", [date, date, date, date]), '2006 Friday, August 11, 2006 8/11/06 0:55:12.35');
         assert.equal(stringExtended.format("%[yyyy]Z %[EEEE, MMMM dd, yyyy]Z %[M/dd/yy]Z %[H:m:s.SS]Z", [date, date, date, date]), '2006 Friday, August 11, 2006 8/11/06 ' + date.getUTCHours() + ':55:12.35');
-        assert.equal(stringExtended.format("%Z", [new Date(-1)]), 'Wed, 31 Dec 1969 23:59:59 GMT');
+        assert.equal(stringExtended.format("%Z", [new Date(-1)]), new Date(-1).toUTCString());
         assert.equal(stringExtended.format("%1j,\n%4j", [
             {a: "b"},
             {a: "b"}
@@ -93,11 +93,11 @@ it.describe("string-extended",function (it) {
             stringExtended("%4j").format([test]);
         });
         var tzInfo = getTimeZoneOffset(new Date(-1));
-        assert.equal(stringExtended("%D").format([new Date(-1)]).value(), 'Wed Dec 31 1969 ' + (23 + tzInfo[0]) + ':59:59 GMT' + tzInfo[1] + " (" + tzInfo[2] + ")");
+        assert.equal(stringExtended("%D").format([new Date(-1)]).value(), new Date(-1).toString());
         var date = new Date(2006, 7, 11, 0, 55, 12, 345);
         assert.equal(stringExtended("%[yyyy]D %[EEEE, MMMM dd, yyyy]D %[M/dd/yy]D %[H:m:s.SS]D").format([date, date, date, date]).value(), '2006 Friday, August 11, 2006 8/11/06 0:55:12.35');
         assert.equal(stringExtended("%[yyyy]Z %[EEEE, MMMM dd, yyyy]Z %[M/dd/yy]Z %[H:m:s.SS]Z").format([date, date, date, date]).value(), '2006 Friday, August 11, 2006 8/11/06 ' + date.getUTCHours() + ':55:12.35');
-        assert.equal(stringExtended("%Z").format([new Date(-1)]).value(), 'Wed, 31 Dec 1969 23:59:59 GMT');
+        assert.equal(stringExtended("%Z").format([new Date(-1)]).value(), new Date(-1).toUTCString());
         assert.equal(stringExtended("%1j,\n%4j").format([
             {a: "b"},
             {a: "b"}
