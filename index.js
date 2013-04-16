@@ -24,8 +24,7 @@
 
                 function toJSON(obj) {
                     if (is.isDate(obj)) {
-                        return isFinite(obj.valueOf())
-                            ? obj.getUTCFullYear() + '-' +
+                        return isFinite(obj.valueOf()) ? obj.getUTCFullYear() + '-' +
                             f(obj.getUTCMonth() + 1) + '-' +
                             f(obj.getUTCDate()) + 'T' +
                             f(obj.getUTCHours()) + ':' +
@@ -73,52 +72,52 @@
                         value = rep.call(holder, key, value);
                     }
                     switch (typeof value) {
-                        case 'string':
-                            return quote(value);
-                        case 'number':
-                            return isFinite(value) ? String(value) : 'null';
-                        case 'boolean':
-                        case 'null':
-                            return String(value);
-                        case 'object':
-                            if (!value) {
-                                return 'null';
+                    case 'string':
+                        return quote(value);
+                    case 'number':
+                        return isFinite(value) ? String(value) : 'null';
+                    case 'boolean':
+                    case 'null':
+                        return String(value);
+                    case 'object':
+                        if (!value) {
+                            return 'null';
+                        }
+                        gap += indent;
+                        partial = [];
+                        if (Object.prototype.toString.apply(value) === '[object Array]') {
+                            length = value.length;
+                            for (i = 0; i < length; i += 1) {
+                                partial[i] = str(i, value) || 'null';
                             }
-                            gap += indent;
-                            partial = [];
-                            if (Object.prototype.toString.apply(value) === '[object Array]') {
-                                length = value.length;
-                                for (i = 0; i < length; i += 1) {
-                                    partial[i] = str(i, value) || 'null';
-                                }
-                                v = partial.length === 0 ? '[]' : gap ? '[\n' + gap + partial.join(',\n' + gap) + '\n' + mind + ']' : '[' + partial.join(',') + ']';
-                                gap = mind;
-                                return v;
-                            }
-                            if (rep && typeof rep === 'object') {
-                                length = rep.length;
-                                for (i = 0; i < length; i += 1) {
-                                    if (typeof rep[i] === 'string') {
-                                        k = rep[i];
-                                        v = str(k, value);
-                                        if (v) {
-                                            partial.push(quote(k) + (gap ? ': ' : ':') + v);
-                                        }
-                                    }
-                                }
-                            } else {
-                                for (k in value) {
-                                    if (Object.prototype.hasOwnProperty.call(value, k)) {
-                                        v = str(k, value);
-                                        if (v) {
-                                            partial.push(quote(k) + (gap ? ': ' : ':') + v);
-                                        }
-                                    }
-                                }
-                            }
-                            v = partial.length === 0 ? '{}' : gap ? '{\n' + gap + partial.join(',\n' + gap) + '\n' + mind + '}' : '{' + partial.join(',') + '}';
+                            v = partial.length === 0 ? '[]' : gap ? '[\n' + gap + partial.join(',\n' + gap) + '\n' + mind + ']' : '[' + partial.join(',') + ']';
                             gap = mind;
                             return v;
+                        }
+                        if (rep && typeof rep === 'object') {
+                            length = rep.length;
+                            for (i = 0; i < length; i += 1) {
+                                if (typeof rep[i] === 'string') {
+                                    k = rep[i];
+                                    v = str(k, value);
+                                    if (v) {
+                                        partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                                    }
+                                }
+                            }
+                        } else {
+                            for (k in value) {
+                                if (Object.prototype.hasOwnProperty.call(value, k)) {
+                                    v = str(k, value);
+                                    if (v) {
+                                        partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                                    }
+                                }
+                            }
+                        }
+                        v = partial.length === 0 ? '{}' : gap ? '{\n' + gap + partial.join(',\n' + gap) + '\n' + mind + '}' : '{' + partial.join(',') + '}';
+                        gap = mind;
+                        return v;
                     }
                 }
 
@@ -142,7 +141,7 @@
                     return str('', {'': value});
                 };
             }());
-        }else{
+        } else {
             stringify = JSON.stringify;
         }
 
@@ -493,21 +492,21 @@
                     } else {
                         format = format.replace(/^\[|\]$/g, "");
                         switch (type) {
-                            case "s":
-                                ret = formatString(replacer, format);
-                                break;
-                            case "d":
-                                ret = formatNumber(replacer, format);
-                                break;
-                            case "j":
-                                ret = formatObject(replacer, format);
-                                break;
-                            case "D":
-                                ret = date.format(replacer, format);
-                                break;
-                            case "Z":
-                                ret = date.format(replacer, format, true);
-                                break;
+                        case "s":
+                            ret = formatString(replacer, format);
+                            break;
+                        case "d":
+                            ret = formatNumber(replacer, format);
+                            break;
+                        case "j":
+                            ret = formatObject(replacer, format);
+                            break;
+                        case "D":
+                            ret = date.format(replacer, format);
+                            break;
+                        case "Z":
+                            ret = date.format(replacer, format, true);
+                            break;
                         }
                     }
                     return ret;
@@ -609,8 +608,8 @@
 
         }
     } else if ("function" === typeof define) {
-        define(["require"], function (require) {
-            return defineString(require("extended"), require("is-extended"), require("date-extended"));
+        define(["extended", "is-extended", "date-extended"], function (extended, is, date) {
+            return defineString(extended, is, date);
         });
     } else {
         this.stringExtended = defineString(this.extended, this.isExtended, this.dateExtended);
