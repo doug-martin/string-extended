@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/doug-martin/string-extended.png?branch=master)](undefined)
+[![Build Status](https://travis-ci.org/doug-martin/string-extended.png?branch=master)](https://travis-ci.org/doug-martin/string-extended)
 
-[![browser support](https://ci.testling.com/doug-martin/string-extended.png)](https://ci.testling.com/doug-martin/string-extended)
+[![browser support](https://ci.testling.com/doug-martin/string-extended.png)](http://ci.testling.com/doug-martin/string-extended)
 
 # string-extended
 
@@ -66,10 +66,57 @@ string.truncate("abcdefg") => "abcdefg"
 
 **`multiply`**
 
- Returns a string duplicated n times;
+Returns a string duplicated n times
 
 ```javascript
 string.multiply("HELLO", 5) => "HELLOHELLOHELLOHELLOHELLO"
+```
+
+
+**`escape`**
+
+Escapes a string so that it can safely be used in a RegExp.
+
+```javascript
+stringExtended.escape(".$?*|{}()[]\/+^"); "//\.\$\?\*\|\{\}\(\)\[\]\/\+\^"
+
+stringExtended(".$?*|{}()[]\/+^").escape().value(); "//\.\$\?\*\|\{\}\(\)\[\]\/\+\^"
+```
+
+You can also specify an optional array of characters to ignore when escaping.
+
+```javascript
+stringExtended.escape(".$?*|{}()[]\/+^", [".", "?", "{", "["]); //".\$?\*\|{\}\(\)[\]\/\+\^"
+stringExtended(".$?*|{}()[]\/+^").escape([".", "?", "{", "["]).value(); //".\$?\*\|{\}\(\)[\]\/\+\^"
+```
+
+**`trim`**
+Trims white space characters from the beginning and end of a string.
+
+```javascript
+stringExtended.trim("   Hello World   "); //"Hello World"
+
+stringExtended("   Hello World   ").trim().value(); //"Hello World"
+```
+
+**`trimLeft`**
+
+Trims white space characters from the beginning of a string.
+
+```javascript
+stringExtended.trimLeft("   Hello World   "); //"Hello World   "
+
+stringExtended("   Hello World   ").trimLeft().value(); //"Hello World   "
+```
+
+**`trimRight`**
+
+Trims white space characters from the end of a string.
+
+```javascript
+stringExtended.trimLeft("   Hello World   "); //"   Hello World"
+
+stringExtended("   Hello World   ").trimLeft().value(); //"   Hello World"
 ```
 
 **`format`**

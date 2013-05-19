@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    function defineString(extended, is, date) {
+    function defineString(extended, is, date, arr) {
 
         var stringify;
         if (typeof JSON === "undefined") {
@@ -581,6 +581,31 @@
             return ret;
         }
 
+        function escape(str, except) {
+            return str.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, function (ch) {
+                if (except && arr.indexOf(except, ch) !== -1) {
+                    return ch;
+                }
+                return "\\" + ch;
+            });
+        }
+
+        function trim(str) {
+            return str.replace(/^\s*|\s*$/g, "");
+        }
+
+        function trimLeft(str) {
+            return str.replace(/^\s*/, "");
+        }
+
+        function trimRight(str) {
+            return str.replace(/\s*$/, "");
+        }
+
+        function isEmpty(str) {
+            return str.length === 0;
+        }
+
 
         var string = {
             toArray: toArray,
@@ -588,31 +613,27 @@
             truncate: truncate,
             multiply: multiply,
             format: format,
-            style: style
+            style: style,
+            escape: escape,
+            trim: trim,
+            trimLeft: trimLeft,
+            trimRight: trimRight,
+            isEmpty: isEmpty
         };
-
-
-        var i, ret = extended.define(is.isString, string).define(is.isArray, {style: style});
-        for (i in string) {
-            if (string.hasOwnProperty(i)) {
-                ret[i] = string[i];
-            }
-        }
-        ret.characters = characters;
-        return ret;
+        return extended.define(is.isString, string).define(is.isArray, {style: style}).expose(string).expose({characters: characters});
     }
 
     if ("undefined" !== typeof exports) {
         if ("undefined" !== typeof module && module.exports) {
-            module.exports = defineString(require("extended"), require("is-extended"), require("date-extended"));
+            module.exports = defineString(require("extended"), require("is-extended"), require("date-extended"), require("array-extended"));
 
         }
     } else if ("function" === typeof define) {
-        define(["extended", "is-extended", "date-extended"], function (extended, is, date) {
-            return defineString(extended, is, date);
+        define(["extended", "is-extended", "date-extended", "array-extended"], function (extended, is, date, arr) {
+            return defineString(extended, is, date, arr);
         });
     } else {
-        this.stringExtended = defineString(this.extended, this.isExtended, this.dateExtended);
+        this.stringExtended = defineString(this.extended, this.isExtended, this.dateExtended, this.arrayExtended);
     }
 
 }).call(this);
