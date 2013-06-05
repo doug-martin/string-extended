@@ -628,7 +628,7 @@
             module.exports = defineString(require("extended"), require("is-extended"), require("date-extended"), require("array-extended"));
 
         }
-    } else if ("function" === typeof define) {
+    } else if ("function" === typeof define && define.amd) {
         define(["extended", "is-extended", "date-extended", "array-extended"], function (extended, is, date, arr) {
             return defineString(extended, is, date, arr);
         });

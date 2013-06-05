@@ -1,6 +1,6 @@
 {
   "name": "string-extended",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Additional string extensions with a chainable api",
   "main": "index.js",
   "scripts": {
